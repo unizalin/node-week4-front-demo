@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaWall</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&amp;family=Baloo+Da+2&amp;family=Noto+Sans+TC:wght@400;700&amp;family=Paytone+One&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <section>
+      <nav
+        class="navbar navbar-expand-lg navbar-light border-bottom border-3 border-dark"
+      >
+        <div class="container px-lg-12">
+          <h1 class="font-paytone">
+            <a class="navbar-brand fs-1" href="#">MetaWall</a>
+          </h1>
+          <div class="d-flex align-items-center">
+            <img src="./img/userinit.jpeg" alt="user1" class="me-2 img-fluid userIcon " />
+            <div class="dropdown bg-white me-2">
+              <button
+                class="btn btn-white border-0 text-decoration-underline fw-bolder font-azeret"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Member
+              </button>
+              <ul
+                class="dropdown-menu py-0"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">我的貼文牆</a>
+                </li>
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">修改個人資料</a>
+                </li>
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">登出</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section class="container mt-7 px-lg-12">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-4 pe-1 mb-md-2 mb-3">
+              <select id="sortPost" class="form-select py-2">
+                <option selected value="desc">新到舊</option>
+                <option value="asc">舊到新</option>
+              </select>
+            </div>
+            <div class="col-md-8">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="input-search"
+                  placeholder="搜尋貼文"
+                  aria-label="search"
+                  aria-describedby="button-search"
+                />
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="button-search"
+                >
+                  <span class="material-icons-outlined"> search </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="ps-0" id="cardList">
+            <!-- <li class="card h-100 py-4 px-4 mb-3 border-2 shadow-black">
+              <div class="d-flex align-items-center mb-3">
+                <img class="me-3 img-fluid" src="./img/user1.png" alt="user1" />
+                <div class="d-flex flex-column mt-2">
+                  <a href="#" class="mb-0 fw-bold">邊緣小杰</a>
+                  <small class="text-muted">2022/1/10 12:00</small>
+                </div>
+              </div>
+              <p>外面看起來就超冷.... 我決定回被窩繼續睡....>.&lt;</p>
+              <img src="./img/photo1.png" alt="photo1" class="img-fluid" />
+            </li> -->
+          </ul>
+        </div>
+        <div class="col-md-5 d-md-block d-none">
+          <div class="border border-dark border-2 px-4 py-5">
+            <div class="d-grid gap-2 mb-4">
+              <button
+                type="submit"
+                class="btn btn-primary shadow-black rounded-3"
+              >
+                <a href="./post.html">張貼動態</a>
+              </button>
+            </div>
+            <ul class="ps-0">
+              <li class="card h-100 border-0 mb-4">
+                <a href="#">
+                  <div class="d-flex align-items-center">
+                    <img
+                      class="mx-3 img-fluid userIcon"
+                      src="./img/userinit.jpeg"
+                      alt="user1"
+                    />
+                    <p class="mt-2 fw-bold">邊緣小杰</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card h-100 border-0 mb-4">
+                <a href="#">
+                  <div class="media d-flex align-items-center">
+                    <div
+                      class="rounded-circle border border-dark p-2 mx-3 bg-light hover-primary"
+                    >
+                      <span class="material-icons-outlined">
+                        notifications
+                      </span>
+                    </div>
+                    <p class="mt-2 fw-bold">追蹤名單</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card h-100 border-0">
+                <a href="#">
+                  <div class="media d-flex align-items-center">
+                    <div
+                      class="rounded-circle border border-dark p-2 mx-3 bg-light hover-primary"
+                    >
+                      <span class="material-icons material-icons-outlined">
+                        thumb_up
+                      </span>
+                    </div>
+                    <p class="mt-2 fw-bold">我按讚的文章</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        class="list-group border border-dark rounded-pill fixed-bottom bg-secondary d-md-none mx-1"
+      >
+        <ul class="d-flex justify-content-around mb-0 ps-0">
+          <li class="list-group-item border-0 bg-secondary">
+            <a href="#">
+              <div class="rounded-circle border border-dark p-2 bg-white">
+                <span class="material-icons material-icons-outlined">
+                  home
+                </span>
+              </div>
+            </a>
+          </li>
+          <li class="list-group-item border-0 bg-secondary">
+            <a href="#">
+              <div class="rounded-circle border border-dark p-2 bg-white">
+                <span class="material-icons material-icons-outlined">
+                  notifications
+                </span>
+              </div>
+            </a>
+          </li>
+          <li class="list-group-item border-0 bg-secondary">
+            <a href="#">
+              <div class="rounded-circle border border-dark p-2 bg-white">
+                <span class="material-icons material-icons-outlined">
+                  thumb_up
+                </span>
+              </div>
+            </a>
+          </li>
+          <li class="list-group-item border-0 bg-secondary">
+            <a href="#">
+              <div class="rounded-circle border border-dark p-2 bg-primary">
+                <span class="material-icons material-icons-outlined text-white">
+                  add
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+
+        const cardList = document.getElementById('cardList')
+        const searchBtn = document.getElementById('button-search')
+        const searchInput = document.getElementById('input-search')
+        const sortPost = document.getElementById('sortPost')
+        function getApi(keyword='',timeSort='desc'){
+          let postsUrl = `https://mysterious-anchorage-86539.herokuapp.com/posts/getAllPosts/?keyword=${keyword}&timeSort=${timeSort}`
+          axios.get(postsUrl)
+            .then((res)=>{
+              let str = ''
+              const dataLists = res.data.data
+              console.log(dataLists)
+              dataLists.forEach(element => {
+                str+=`
+                  <li class="card h-100 py-4 px-4 mb-3 border-2 shadow-black">
+                    <div class="d-flex align-items-center mb-3">
+                      <img class="me-3 img-fluid userIcon" src="${element.user.photo}" alt="user1" />
+                      <div class="d-flex flex-column mt-2">
+                        <a href="#" class="mb-0 fw-bold">${element.user.name}</a>
+                        <small class="text-muted">${convertDate(element.createdAt)}</small>
+                      </div>
+                    </div>
+                    <p>${element.content}</p>
+                    <img src="${element.image}" alt="photo1" class="img-fluid ${!element.image?'d-none':''}" />
+                  </li>
+                `
+              });
+            cardList.innerHTML = str
+          })
+        }
+
+        function convertDate(isoDate){
+          let date = isoDate.split('T')[0].replaceAll('-','/')
+          let time = isoDate.split('T')[1].substr(0,8)
+          return `${date} ${time} `
+        }
+        searchBtn.addEventListener('click',(e)=>{
+          const keyword = searchInput.value.trim()
+          if(!keyword){
+          }else{
+            getApi(keyword)
+          }
+        })
+        sortPost.addEventListener('change',(e)=>{
+          const sort = e.target.value
+          const keyword = searchInput.value.trim()
+          getApi(keyword,sort)
+        })
+        getApi()
+      });     
+  </script>
+  </body>
+</html>

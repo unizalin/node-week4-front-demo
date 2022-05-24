@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaWall</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&amp;family=Baloo+Da+2&amp;family=Noto+Sans+TC:wght@400;700&amp;family=Paytone+One&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.3/qs.js"></script>
+  </head>
+  <body>
+    <section>
+      <nav
+        class="navbar navbar-expand-lg navbar-light border-bottom border-3 border-dark"
+      >
+        <div class="container px-lg-12">
+          <h1 class="font-paytone">
+            <a class="navbar-brand fs-1" href="#">MetaWall</a>
+          </h1>
+          <div class="d-flex align-items-center">
+            <img src="./img/userinit.jpeg" alt="user1" class="userIcon me-2 img-fluid" />
+            <div class="dropdown bg-white me-2">
+              <button
+                class="btn btn-white border-0 text-decoration-underline fw-bolder font-azeret"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Member
+              </button>
+              <ul
+                class="dropdown-menu py-0"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">我的貼文牆</a>
+                </li>
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">修改個人資料</a>
+                </li>
+                <li class="border border-dark">
+                  <a class="dropdown-item" href="#">登出</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section class="container mt-7 px-lg-12">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="card mb-5 rounded-0 border-2 position-relative">
+            <h2 class="text-center fw-bold py-3 mb-0 fs-5">張貼動態</h2>
+            <div
+              class="position-absolute border border-dark border-2 w-100 py-4"
+              style="z-index: -1; top: 10px; left: -6px"
+            ></div>
+          </div>
+          <div class="card border border-dark border-2 shadow-black p-5">
+            <form class="needs-validation" novalidate>
+              <div class="form-group mb-3">
+                <label for="content">貼文內容</label>
+                <textarea
+                  class="form-control textPost"
+                  id="content"
+                  rows="5"
+                  placeholder="輸入您的貼文內容"
+                  required
+                ></textarea>
+              </div>
+              <div class="input-group mt-2 mb-3">
+                 <label for="exampleFormControlInput1 mr-2" class="form-label">圖片網址</label>
+                 <div class="col-5 ms-3">
+                    <input class="form-control imgUrl " type="text" placeholder="圖片網址" aria-label=".form-control-sm example" pattern="^https"">
+                 </div>
+                <!-- <label class="btn btn-dark">
+                  <input
+                    id="upload_img"
+                    style="display: none"
+                    type="file"
+                    class="is-valid"
+                    accept="image/jpg, image/jpeg, image/png"
+                  />
+                  上傳圖片
+                </label>
+                 <label class="btn btn-dark">
+                  <input
+                    id="upload_img"
+                    style="display: none"
+                    type="file"
+                    class="is-valid"
+                    accept="image/jpg, image/jpeg, image/png"
+                  />
+                  上傳圖片
+                </label> -->
+              </div>
+              <img
+                src="./img/photo1.png"
+                alt="photo1"
+                id="isShowUplodImg"
+                class="w-100 img-fluid mb-2 d-none"
+              />
+              <p id="imgErrCode" class="text-danger text-center mb-2 fs-7 d-none">
+                圖片檔案過大，僅限 1mb 以下檔案
+                <br />
+                圖片格式錯誤，僅限 JPG、PNG 圖片
+              </p>
+              <div class="d-grid gap-2">
+                <button
+                  type="submit"
+                  class="btn btn-gray-dark border border-dark border-2 fw-bold"
+                >
+                  送出貼文
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5 d-md-block d-none">
+          <div class="border border-dark border-2 px-4 py-5">
+            <div class="d-grid gap-2 mb-4">
+              <button
+                type="submit"
+                class="btn btn-primary shadow-black rounded-3"
+              >
+                張貼動態
+              </button>
+            </div>
+            <ul class="ps-0">
+              <li class="card h-100 border-0 mb-4">
+                <a href="#">
+                  <div class="d-flex align-items-center">
+                    <img
+                      class="mx-3 img-fluid userIcon"
+                      src="./img/userinit.jpeg"
+                      alt="user1"
+                    />
+                    <p class="mt-2 fw-bold">邊緣小杰</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card h-100 border-0 mb-4">
+                <a href="#">
+                  <div class="media d-flex align-items-center">
+                    <div
+                      class="rounded-circle border border-dark p-2 mx-3 bg-light hover-primary"
+                    >
+                      <span class="material-icons-outlined">
+                        notifications
+                      </span>
+                    </div>
+                    <p class="mt-2 fw-bold">追蹤名單</p>
+                  </div>
+                </a>
+              </li>
+              <li class="card h-100 border-0">
+                <a href="#">
+                  <div class="media d-flex align-items-center">
+                    <div
+                      class="rounded-circle border border-dark p-2 mx-3 bg-light hover-primary"
+                    >
+                      <span class="material-icons material-icons-outlined">
+                        thumb_up
+                      </span>
+                    </div>
+                    <p class="mt-2 fw-bold">我按讚的文章</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./validation.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        // const uploadImg = document.getElementById('upload_img')
+        // const isShowUplodImg = document.getElementById('isShowUplodImg')
+        // const sizeLimit = 1024 *1042
+        // let formData =  new FormData();
+
+        // uploadImg.addEventListener('change',(e)=>{
+        //   let image = e.target
+        //   if(image.files[0].size > sizeLimit){
+        //     $('#imgErrCode').fadeIn()
+          
+        //   }else{
+        //     $('#imgErrCode').fadeOut()
+
+        //     readURL(e.target)
+        //   }
+        // })
+
+        // function readURL(input){
+        //   if(input.files && input.files[0]){
+        //     var reader = new FileReader();
+        //     reader.onload = function (e) {
+        //       formData.append("file", e.target.result);
+        //       console.log('formData',formData)
+        //       upload(formData)
+
+        //       isShowUplodImg.src = e.target.result
+        //     }
+        //     reader.readAsDataURL(input.files[0]);
+        //   }
+        // }
+        // function upload(form){
+        //   console.log('upload',form)
+        //   let data = Qs.stringify(form)
+        //   console.log('upload',data)
+        //   const url = `https://mysterious-anchorage-86539.herokuapp.com/files/uploadImage`
+        //   axios.post(url,form,{headers: {'Content-Type': 'multipart/form-data'}})
+        //     .then((res)=>{
+        //       console.log(res)
+        //     })
+        //     .error((err)=>{
+        //       console.log(err)
+        //     })
+        // }
+      })
+    </script>
+  </body>
+</html>
